@@ -1,10 +1,12 @@
 require("dotenv").config(); // Must be at the top
 
 const express = require("express");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const signupRoute = require("./routes/signup");
 const mongoose = require("mongoose");
 const connectDB = require("./configuration/dbConfig");
+const createAdminAccount = require("./scripts/admin");
 
 const app = express();
 
@@ -16,6 +18,12 @@ const PORT = process.env.PORT || 5000;
 
 // app.use(bodyParser.json());
 app.use(express.json());
+app.use(cors());
+
+//We will always call the createdAdminAaccount anytime the projet runs
+
+createAdminAccount();
+
 app.use("/user", signupRoute);
 
 app.listen(PORT, async () => {
