@@ -2,18 +2,19 @@ const User = require("../models/user");
 
 const bcrypt = require("bcryptjs");
 
-async function creaateAdminAccount(user) {
+async function creaateAdminAccount() {
   try {
     //check if admin has been created before
 
-    const existingAdmin = await User.findOne({ email: "tochidan@gamil.com" });
+    const existingAdmin = await User.findOne({ email: "tochidan11@gmail.com" });
     // const salt = bcrypt.genSaltSync(10);
     // const hashPassword = bcrypt.hashSync(password, salt);
     if (!existingAdmin) {
       const newAdmin = new User({
-        email: "tochidan11@gmail.com",
         name: "Admin Dan",
+        email: "tochidan11@gmail.com",
         password: bcrypt.hashSync("Admin", bcrypt.genSaltSync(10)),
+        role: "admin",
       });
 
       await newAdmin.save();
@@ -28,4 +29,4 @@ async function creaateAdminAccount(user) {
   }
 }
 
-modules.exports = creaateAdminAccount;
+module.exports = creaateAdminAccount;

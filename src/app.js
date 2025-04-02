@@ -6,13 +6,15 @@ const bodyParser = require("body-parser");
 const signupRoute = require("./routes/signup");
 const mongoose = require("mongoose");
 const connectDB = require("./configuration/dbConfig");
-const createAdminAccount = require("./scripts/admin");
+const creaateAdminAccount = require("./scripts/admin");
 
 const app = express();
 
 connectDB(
   "mongodb+srv://Danitech:33541712@cluster0.glsljpc.mongodb.net/jwt_db"
 );
+
+creaateAdminAccount();
 
 const PORT = process.env.PORT || 5000;
 
@@ -21,8 +23,6 @@ app.use(express.json());
 app.use(cors());
 
 //We will always call the createdAdminAaccount anytime the projet runs
-
-createAdminAccount();
 
 app.use("/user", signupRoute);
 
