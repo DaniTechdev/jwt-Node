@@ -4,8 +4,12 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const signupRoute = require("./routes/signup");
+const loginRoute = require("./routes/login");
+const userRoute = require("./routes/users");
+
 const mongoose = require("mongoose");
 const connectDB = require("./configuration/dbConfig");
+
 const creaateAdminAccount = require("./scripts/admin");
 
 const app = express();
@@ -25,6 +29,9 @@ app.use(cors());
 //We will always call the createdAdminAaccount anytime the projet runs
 
 app.use("/user", signupRoute);
+app.use("/auth", loginRoute);
+app.use("/api", userRoute);
+app.use("/api", loginRoute);
 
 app.listen(PORT, async () => {
   try {
